@@ -1,0 +1,235 @@
+
+{% include 'html-header.twig' %}	
+<style>
+
+h1{
+  font-size: 2.5rem;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: #444;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+
+.plate{
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+	-webkit-perspective: 1000px;
+	        perspective: 1000px;
+}
+
+.front,
+.back{
+  background-size: cover;
+	background-position: center;
+	-webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	-o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden;
+	text-align: center;
+	height: 250px;
+	width: 250px;
+	border-radius: 200px;
+	color: #fff;
+	font-size: 1.5rem;
+}
+
+.back{
+  background: #cedce7;
+  background: -webkit-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: -o-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+}
+
+.front:after{
+	position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: '';
+    display: block;
+    opacity: .6;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    border-radius: 10px;
+}
+.plate:hover .front,
+.plate:hover .back{
+    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width: 100%; */
+}
+
+.inner{
+    -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+            transform: translateY(-50%) translateZ(60px) scale(0.94);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    outline: 1px solid transparent;
+    -webkit-perspective: inherit;
+            perspective: inherit;
+    z-index: 2;
+}
+
+.plate .back{
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.plate .front{
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.plate:hover .back{
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.plate:hover .front{
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.front .inner p{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.front .inner p:after{
+  content: '';
+  width: 4rem;
+  height: 2px;
+  position: absolute;
+  background: #C6D4DF;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -.75rem;
+}
+
+.front .inner span{
+  color: rgba(255,255,255,0.7);
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+.jumbotron {
+	background-image: url({{cover_image.src}});
+}
+
+</style>
+</head>
+
+<body class="{{body_class}}" data-template="base.twig">
+
+	<header class="header" >
+		<div class="jumbotron jumbotron-fluid">
+  			<div class="container">
+    			<h1 class="display-3">{% include 'logo.twig' %} {{site.name}}</h1>
+    			<p class="lead centered">Blurb here</p>
+  			</div>
+		</div>
+		<nav id="nav-main" class="nav-main" role="navigation">
+			{% include "menu.twig" with {'menu': menu.get_items} %}
+		</nav>
+	</header>
+
+	<section id="content" role="main" class="content-wrapper">
+		<div class="container">
+		
+	<div class="row">
+	
+		<!-- <img src="{{cover_image.src}}" class="cover-image" /> -->
+	
+  		<div class="col-6 col-md-4">
+			<div class="plate" ontouchstart="this.classList.toggle('hover');">
+				<div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+					<div class="inner">
+						<p>Japan</p>
+              			<span>Lorem ipsum</span>
+					</div>
+				</div>
+				<div class="back">
+					<div class="inner">
+						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+  		
+  		
+  		<div class="col-6 col-md-4">
+			<div class="plate" ontouchstart="this.classList.toggle('hover');">
+				<div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+					<div class="inner">
+						<p>Diligord</p>
+              			<span>Lorem ipsum</span>
+					</div>
+				</div>
+				<div class="back">
+					<div class="inner">
+						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-6 col-md-4">
+			<div class="plate" ontouchstart="this.classList.toggle('hover');">
+				<div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+					<div class="inner">
+						<p>Diligord</p>
+              			<span>Lorem ipsum</span>
+					</div>
+				</div>
+				<div class="back">
+					<div class="inner">
+						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+  		
+	</div>
+</div>
+	</section>
+
+
+	<footer id="footer">
+		{% include 'footer.twig' %}
+	</footer>
+	{{ function('wp_footer') }}
+
+</body>
+</html>

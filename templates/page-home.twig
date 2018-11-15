@@ -1,0 +1,443 @@
+{% include 'html-header.twig' %}
+{% block head %}
+<style>
+.footer {display: none !important;}
+
+.title {
+  font-size: 5.5rem;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: #444;
+  text-align: center;
+  margin: 2rem 0;
+  /* margin-left: 5rem; */
+}
+
+#logo {
+	margin-bottom: -1.2rem;
+}
+
+
+.plate, .plate-alt{
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+	-webkit-perspective: 1000px;
+	        perspective: 1000px;
+	        border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    border: 2px solid #EAEAEA;
+    box-shadow: 10px 9px 0 0 #EAEAEA;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.front, .back{
+  background-size: cover;
+	background-position: center;
+	-webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	-o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden;
+	text-align: center;
+	height: 250px;
+	width: 250px;
+	border-radius: 200px;
+	color: #fff;
+	font-size: 1.5rem;
+}
+
+.back {
+  background: #cedce7;
+  background: -webkit-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: -o-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+}
+
+.front:after {
+	position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: '';
+    display: block;
+    opacity: .6;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    border-radius: 10px;
+}
+.plate:hover .front, .plate:hover .back {
+    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width: 100%; */
+}
+
+.inner {
+    -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+            transform: translateY(-50%) translateZ(60px) scale(0.94);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    outline: 1px solid transparent;
+    -webkit-perspective: inherit;
+            perspective: inherit;
+    z-index: 2;
+}
+
+.plate .back, .plate-alt .back {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.plate .front, .plate-alt .front {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+                background-repeat: no-repeat;
+}
+
+.plate:hover .back {
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.plate:hover .front {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.front .inner p {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.front .inner p:after {
+  content: '';
+  width: 4rem;
+  height: 2px;
+  position: absolute;
+  background: #C6D4DF;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -.75rem;
+}
+
+.front .inner span {
+  color: rgba(255,255,255,0.7);
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+.header {
+	background-image: url('{{post.thumbnail.src}}');
+}
+
+
+
+.arrows {
+  padding: 2em;
+}
+
+g.arrows {
+	stroke: white;
+}
+
+.arrows-1 path {
+  -webkit-animation-name: arrows-1-anim;
+          animation-name: arrows-1-anim;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+.arrows-1 path.a1 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+.arrows-1 path.a2 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+@-webkit-keyframes arrows-1-anim {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes arrows-1-anim {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.scroll-arrows-conatiner {
+	margin-top: 1vh;
+}
+
+/*
+.plate {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+.plate:before {
+  top: 6px;
+  left: 6px;
+  position: absolute;
+  content: " ";
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  box-shadow: 10px 9px 0 0 #EAEAEA;
+}
+ */
+
+.col-xs-12 {
+	text-align: -webkit-center;
+}
+/*
+@media (max-width: 767px) {
+	.col-sx-12 {
+    	width: 50%;
+	}
+}
+ */
+
+</style>
+{% endblock %}
+</head>
+
+{% block body %}
+<body class="landing-page">
+
+	{% include "nav.twig" with { show_logo: false } %}
+
+    <div class="wrapper">
+        <div class="header header-filter">
+            <div class="container">
+
+                <div class="row">
+					<div class="col-sm-12">
+						<h1 class="title align-middle">{% include 'logo.twig' with { logo_width: '75px', logo_height: '60px' } %} {{ site.name }}</h1>
+					</div>
+                </div>
+
+                <div class="row justify-content-md-center">
+                	<div class="col-md-4 col-md-offset-4">
+	                    <h4>{{post.content}}</h4>
+					</div>
+                </div>
+
+                <div class="row scroll-arrows-conatiner" style="text-align: center;">
+                	<svg class="arrows arrows-1" xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="-1 -1 22 26">
+      					<g fill="none" fill-rule="evenodd" stroke="#fff">
+        					<path class="a1" d="M0 0l10 12L20 0"></path>
+        					<path class="a2" d="M0 12l10 12 10-12"></path>
+      					</g>
+    				</svg>
+                </div>
+
+            </div>
+        </div>
+
+		<div class="main main-raised">
+			<div class="container">
+				<h2 class="text-center">Explore the Cuisines</h2>
+				<div class="row">
+					{% if post.children %}
+    					{% for child in post.children %}
+        					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"">
+
+        						{% if child.food_image %}
+        						<div class="plate" ontouchstart="this.classList.toggle('hover');">
+									<div class="front" style="background-image: url({{ TimberImage(child.food_image).src }}); background-size: {{child.food_image_size}}px;">
+										<div class="inner">
+										</div>
+									</div>
+
+									<div class="back">
+										<div class="inner">
+											<h2 style="margin: 0">{{child.title}}</h2>
+											<a href="{{child.link}}"><button id="btn-location" type="button" class="btn btn-primary" style="">Learn More</button></a>
+										</div>
+									</div>
+								</div>
+
+        						{% else %}
+        						<div class="plate-alt">
+									<div class="front" style="background-image: url({{ TimberImage(child.food_image).src }}); background-size: {{child.food_image_size}}px;">
+										<div class="inner">
+											<p style="color: black">{{child.title}}</p>
+											<a href="{{child.link}}"><button id="btn-location" type="button" class="btn btn-primary" style="">Learn More</button></a>
+										</div>
+									</div>
+								</div>
+
+        						{% endif %}
+
+
+
+<!--
+								<div class="plate" ontouchstart="this.classList.toggle('hover');">
+									<div class="front" style="background-image: url({{ TimberImage(child.food_image).src }}); background-size: {{child.food_image_size}}px;">
+										<div class="inner">
+											{% if not child.food_image %}
+											<a href="{{child.link}}"><p style="color: black">{{child.title}}</p></a>
+											{% endif %}
+										</div>
+									</div>
+
+									{% if child.food_image %}
+									<div class="back">
+										<div class="inner">
+											<a href="{{child.link}}"><h2 style="margin: 0">{{child.title}}</h2></a>
+										</div>
+									</div>
+									{% endif %}
+								</div>
+ -->
+
+
+							</div>
+    					{% endfor %}
+					{% endif %}
+				</div>
+	        </div>
+		</div>
+
+		{% block footer %}
+			<footer class="footer">
+				{% include 'footer.twig' %}
+			</footer>
+		{% endblock %}
+	</div>
+    <script>
+    jQuery(document).ready(function() {
+        var timeToDisplay = 2000;
+        var opacityChangeDelay = 175;
+        var opacityChangeAmount = 0.05;
+
+        var slideshow = $('.header');
+        var urls = [
+            'http://adhc.lib.ua.edu/globalfoodways/wp-content/uploads/2018/03/header-background-1.jpg',
+            'http://adhc.lib.ua.edu/globalfoodways/wp-content/uploads/2018/03/header-background-2.jpg',
+            'http://adhc.lib.ua.edu/globalfoodways/wp-content/uploads/2018/03/header-background-3.jpg',
+	    'http://adhc.lib.ua.edu/globalfoodways/wp-content/uploads/2018/03/header-background-4.jpg',
+            'http://adhc.lib.ua.edu/globalfoodways/wp-content/uploads/2018/03/header-background-5.jpg'
+        ];
+
+        var index = 0;
+
+        var transition = function() {
+            var url = urls[index];
+
+            slideshow.css('background-image', 'url(' + url + ')');
+
+            index = index + 1;
+            if (index > urls.length - 1) {
+            index = 0;
+            }
+        };
+
+        var fadeIn = function(opacity) {
+            opacity = opacity + opacityChangeAmount;
+
+            slideshow.css('opacity', opacity);
+
+            if (opacity >= 1) {
+            slideshow.trigger('fadeIn-complete');
+            return;
+            }
+            setTimeout(function() {
+            fadeIn(opacity);
+            }, opacityChangeDelay);
+        };
+
+        var fadeOut = function(opacity) {
+            opacity = opacity - opacityChangeAmount;
+
+            slideshow.css('opacity', opacity);
+
+            if (opacity <= 0) {
+            slideshow.trigger('fadeOut-complete');
+            return;
+            }
+            setTimeout(function() {
+            fadeOut(opacity);
+            }, opacityChangeDelay);
+        };
+
+        slideshow.on('fadeOut-complete', function(event) {
+            transition();
+            fadeIn(0);
+        });
+
+        slideshow.on('display-complete', function(event) {
+            fadeOut(1);
+        });
+
+        slideshow.on('fadeIn-complete', function(event) {
+            setTimeout(function() {
+            slideshow.trigger('display-complete');
+            }, timeToDisplay);
+        });
+
+        transition();
+        fadeIn(0);
+    });
+    </script>
+</body>
+{% endblock %}
+
+{% include 'html-footer.twig' %}

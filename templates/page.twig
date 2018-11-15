@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+
+{% block head %}
+<style>
+.header { background-image: url('{{post.thumbnail.src}}'); }
+.title {
+	color: #fff;
+	padding-top: 1.9em;
+}
+.footer {display: none !important;}
+</style>
+{% endblock %}
+
+{% block content %}
+	{{post.title}}
+	{{post.content}}	
+{% endblock %}

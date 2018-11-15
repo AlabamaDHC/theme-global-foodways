@@ -1,0 +1,54 @@
+{% extends "base.twig" %}
+{% block head %}
+<style>
+.header { background-image: url({{ TimberImage(cuisine.landscape_image).src }}); }
+.profile-content { padding-bottom: 3rem; }
+.article-body p {
+	font-size: medium;
+	font-weight: 400;
+}
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
+			<section class="article-content">
+				<h1 class="article-h1">{{ post.title }}</h1>
+				<h5 class="blog-author">
+					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> {{ post.date }}
+				</h5>
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+			{#
+			<!-- comment box -->
+			<section class="comment-box">
+				<div class="comments">
+				    {% if post.comments %}
+					<h3> comments </h3>
+					{% for cmt in post.comments %}
+					    {% include "comment.twig" with {comment:cmt} %}
+					{% endfor %}
+				    {% endif %}
+				</div>
+
+				{% if post.comment_status == "closed" %}
+					<p> comments for this post are closed </p>
+				{% else %}
+				    <!-- comment form -->
+				    {% include "comment-form.twig" %}
+				{% endif %}
+			</section>
+			#}
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

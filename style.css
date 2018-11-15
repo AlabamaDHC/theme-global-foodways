@@ -1,0 +1,29 @@
+/*
+ * Theme Name: Global Foodways Theme
+ * Description: Made from Timber Starter Theme
+ * Author: Tyler Grace (ADHC)
+*/
+
+.copyright {display: none;}
+
+.brand {
+	
+	    display: inline-flex;
+}
+
+.site-name {
+    padding-top: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    padding-left: 7px;
+}
+
+.title {
+	color: #fff;
+	padding-top: 1.9em;
+}
+
+.profile-content .container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
